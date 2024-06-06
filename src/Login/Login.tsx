@@ -9,13 +9,15 @@ import {
   CreateAccount,
 } from "./Login.style";
 import { Button } from "../inputs/Button/Button.style";
-import { login } from "./login-service";
+import { signUp } from "./login-service";
+import { useUserStore } from "../store/useUserStore";
 
 interface IForm {
   userName: string;
   password: string;
   confirmPassword: string;
   email: string;
+  error: string | null;
 }
 
 const title = {
@@ -59,6 +61,7 @@ const inputType = {
 };
 
 export const Login = () => {
+  const { error, login } = useUserStore();
   const [isAnimating, setIsAnimating] = useState(
     false
   );
@@ -68,6 +71,7 @@ export const Login = () => {
     password: "",
     confirmPassword: "",
     email: "",
+    error: null,
   });
 
   const onInputChange = (e) => {
@@ -89,9 +93,24 @@ export const Login = () => {
   };
 
   const handleSubmit = () => {
-    const { userName, password } = formData;
+    const {
+      userName,
+      password,
+      confirmPassword,
+      email,
+    } = formData;
     if (mode === "login") {
       login({ userName, password });
+    }
+    if (mode === "signUp") {
+      if (password !== confirmPassword) {
+        setForm((prev) => ({
+          ...prev,
+          error: "password doesn't match",
+        }));
+        return;
+      }
+      signUp({ email, password, userName });
     }
   };
 

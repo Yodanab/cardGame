@@ -5,13 +5,27 @@ export const login = async ({
   password,
 }) => {
   const url = "/user/login";
+  const { data } = await axios.post(url, {
+    userName,
+    password,
+  });
+  return data;
+};
+
+export const signUp = async ({
+  userName,
+  password,
+  email,
+}) => {
+  const url = "user/register";
   try {
     const { data } = await axios.post(url, {
-      username: userName,
+      userName,
       password,
+      email,
     });
     return data;
-  } catch {
+  } catch (err) {
     throw Error;
   }
 };
