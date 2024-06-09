@@ -1,6 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: #2b3540;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
