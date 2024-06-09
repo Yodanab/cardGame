@@ -1,18 +1,18 @@
 import { create } from "zustand";
-import { login } from "../Login/login-service";
+import { login } from "../pages/Login/login-service";
 
 interface UserStore {
-  id: string;
+  id: string | null;
   userName: string;
   coins: number;
   email: string;
-  error: unknown;
+  error: string | null;
   login: (reqBody) => Promise<void>;
 }
 
 export const useUserStore = create<UserStore>(
   (set) => ({
-    id: "",
+    id: null,
     userName: "",
     email: "",
     coins: 0,
@@ -25,9 +25,10 @@ export const useUserStore = create<UserStore>(
           id: data.id,
           email: data.email,
           coins: data.coins,
+          error: null,
         });
       } catch (err) {
-        set({ error: err });
+        set({ error: err.response.data.msg });
       }
     },
   })

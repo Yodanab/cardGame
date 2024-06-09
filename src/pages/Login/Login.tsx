@@ -1,16 +1,18 @@
-/** @format */
-
 import React, { useState } from "react";
-import { TextInput } from "../inputs/TextInput/TextInput";
+import { TextInput } from "../../inputs/TextInput/TextInput";
 import {
   LoginModal,
   LoginWrap,
   Title,
   CreateAccount,
+  ErrorMsg,
 } from "./Login.style";
-import { Button } from "../inputs/Button/Button.style";
-import { signUp } from "./login-service";
-import { useUserStore } from "../store/useUserStore";
+import { Button } from "../../inputs/Button/Button.style";
+import {
+  signUp,
+  initForm,
+} from "./login-service";
+import { useUserStore } from "../../store/useUserStore";
 
 interface IForm {
   userName: string;
@@ -62,17 +64,11 @@ const inputType = {
 
 export const Login = () => {
   const { error, login } = useUserStore();
-  const [isAnimating, setIsAnimating] = useState(
-    false
-  );
+
   const [mode, setMode] = useState("login");
-  const [formData, setForm] = useState<IForm>({
-    userName: "",
-    password: "",
-    confirmPassword: "",
-    email: "",
-    error: null,
-  });
+  const [formData, setForm] = useState<IForm>(
+    initForm
+  );
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,16 +79,14 @@ export const Login = () => {
   };
 
   const handleModeChange = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setMode((prev) =>
-        prev === "login" ? "signUp" : "login"
-      );
-      setIsAnimating(false);
-    }, 200);
+    setForm(initForm);
+    setMode((prev) =>
+      prev === "login" ? "signUp" : "login"
+    );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const {
       userName,
       password,
@@ -116,38 +110,34 @@ export const Login = () => {
 
   return (
     <LoginWrap>
-      <LoginModal
-        style={{
-          transform: isAnimating
-            ? "scale(0)"
-            : "scale(1)",
-        }}
-      >
-        <Title>{title[mode]}</Title>
+      <form onSubmit={handleSubmit}>
+        <LoginModal>
+          <Title>{title[mode]}</Title>
 
-        {inputsArr[mode].map((inputItem, i) => {
-          return (
-            <TextInput
-              label={inputTitle[inputItem]}
-              handelChange={onInputChange}
-              name={inputItem}
-              value={formData[inputItem]}
-              type={inputType[inputItem]}
-              key={i}
-            />
-          );
-        })}
+          {inputsArr[mode].map((inputItem, i) => {
+            return (
+              <TextInput
+                label={inputTitle[inputItem]}
+                handelChange={onInputChange}
+                name={inputItem}
+                value={formData[inputItem]}
+                type={inputType[inputItem]}
+                key={i}
+              />
+            );
+          })}
+          {error && <ErrorMsg>{error}</ErrorMsg>}
 
-        <Button onClick={() => handleSubmit()}>
-          Submit
-        </Button>
-        <CreateAccount>
-          {accountString[mode].question}
-          <span onClick={handleModeChange}>
-            {accountString[mode].link}
-          </span>
-        </CreateAccount>
-      </LoginModal>
+          <Button type="submit">Submit</Button>
+
+          <CreateAccount>
+            {accountString[mode].question}
+            <span onClick={handleModeChange}>
+              {accountString[mode].link}
+            </span>
+          </CreateAccount>
+        </LoginModal>
+      </form>
     </LoginWrap>
   );
 };

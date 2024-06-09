@@ -1,10 +1,18 @@
 import axios from "axios";
 
+export const initForm = {
+  userName: "",
+  password: "",
+  confirmPassword: "",
+  email: "",
+  error: null,
+};
+
 export const login = async ({
   userName,
   password,
 }) => {
-  const url = "/user/login";
+  const url = "api/user/login";
   const { data } = await axios.post(url, {
     userName,
     password,

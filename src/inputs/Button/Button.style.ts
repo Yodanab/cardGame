@@ -14,7 +14,8 @@ export const Button = styled.button`
   text-align: center;
   line-height: 50px;
   font-size: 16px;
-  border: 1px solid white;
+  font-family: monospace;
+  border: 1px solid #181c21;
   cursor: pointer;
   :after {
     content: "";
@@ -28,10 +29,10 @@ export const Button = styled.button`
     background: rgba(255, 255, 255, 0.13);
     background: linear-gradient(
       to right,
-      rgba(255, 255, 255, 0.13) 0%,
-      rgba(255, 255, 255, 0.13) 77%,
-      rgba(255, 255, 255, 0.5) 92%,
-      rgba(255, 255, 255, 0) 100%
+      rgba(162, 133, 160, 0.13) 0%,
+      rgba(162, 133, 160, 0.13) 77%,
+      rgba(162, 133, 160, 0.5) 92%,
+      rgba(162, 133, 160, 0) 100%
     );
   }
 

@@ -2,14 +2,15 @@
   "compilerOptions": {
     "jsx": "react",
     "target": "ESNext",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "ESNext",
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "baseUrl": "src",
     "allowSyntheticDefaultImports":true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.test.ts"]
