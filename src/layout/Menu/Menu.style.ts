@@ -2,13 +2,29 @@ import styled from "styled-components";
 import { backgrounds, text } from "../../core/colors";
 
 export const MenuContainer = styled.div`
-  background: white;
+  background: ${backgrounds.menu};
   width: 80px;
   height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  > div {
+    cursor: pointer;
+    svg {
+      width: 35px;
+      height: 35px;
+      fill: ${backgrounds.background};
+    }
+    &:hover svg {
+      fill: #ec802a;
+    }
+  }
 `;
 
 export const SubMenuHeader = styled.ul`
-  background: ${backgrounds.menu};
+  background: ${backgrounds.submenu};
   list-style: none;
   display: flex;
   align-items: center;

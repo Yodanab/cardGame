@@ -7,6 +7,7 @@ import { Menu } from "layout/Menu/Menu";
 import { SubMenu } from "layout/Menu/SubMenu";
 import { useUserStore } from "store/useUserStore";
 import { Login } from "pages/Login/Login";
+import { Header } from "layout/Header/Header";
 
 const App = () => {
   const { id } = useUserStore();
@@ -14,7 +15,7 @@ const App = () => {
     <Style.AppWrapper>
       <Menu />
       <Style.MainWrapper>
-        <div>USER</div>
+        <Header />
         <SubMenu />
         <RouterProvider router={router} />
       </Style.MainWrapper>

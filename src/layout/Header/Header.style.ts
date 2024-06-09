@@ -3,33 +3,29 @@ import { backgrounds, text } from "../../core/colors";
 
 export const Container = styled.div`
   width: 100%;
-  background: ${backgrounds.header};
-`;
-
-export const MenuHeader = styled.ul`
-  list-style: none;
+  background: ${backgrounds.menu};
+  height: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: ${text.white};
-  font-weight: 500;
+  > div {
+    height: 50px;
+    &:first-child {
+      text-align: center;
+      line-height: 50px;
 
-  li {
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    padding: 15px;
-    font-size: 22px;
-    margin-inline: 25px;
-    &:hover {
-      border-bottom-color: #93623b;
-      transition: 0.4s;
-    }
-
-    &.selected {
-      background-color: ${text.white};
-      color: #15181d;
-      border-bottom-color: #93623b;
-      transition: 0.4s;
+      width: 70px;
+      border-right: 1px solid white;
+      font-size: 50px;
+      color: white;
     }
   }
+  .title {
+    margin-inline: 20px;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 50px;
+    color: white;
+  }
 `;
+
+export const MenuHeader = styled.ul``;

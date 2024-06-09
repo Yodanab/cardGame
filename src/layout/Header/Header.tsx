@@ -4,19 +4,11 @@ import * as Style from "./Header.style";
 const menu = ["Home", "Club", "Cards", "INFO"];
 
 export function Header() {
-  const [selected, setSelected] = useState("");
+  // const [selected, setSelected] = useState("");
   return (
     <Style.Container>
-      <Style.MenuHeader>
-        {menu.map((m) => (
-          <li
-            className={m === selected ? "selected" : ""}
-            onClick={() => setSelected(m)}
-          >
-            {m}
-          </li>
-        ))}
-      </Style.MenuHeader>
+      <div>{"<"}</div>
+      <div className="title">CARD GAME</div>
     </Style.Container>
   );
 }
