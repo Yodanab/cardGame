@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { backgrounds, text } from "../../core/colors";
+import {
+  backgrounds,
+  text,
+} from "../../core/colors";
 
 export const MenuContainer = styled.div`
   background: ${backgrounds.menu};
@@ -9,7 +12,7 @@ export const MenuContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   > div {
     cursor: pointer;
     svg {

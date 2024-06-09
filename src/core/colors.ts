@@ -4,7 +4,7 @@ export const text = {
 
 export const backgrounds = {
   header: "#15181d",
-  menu: "#303a44",
+  menu: "#252b31",
   submenu: "#252b31",
   background: "#f2f2f2",
 };

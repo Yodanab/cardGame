@@ -1,17 +1,17 @@
 import React from "react";
 import * as Style from "./Menu.style";
-import { Home } from "core/icons/Home";
-import { BarChart } from "core/icons/BarChart";
+import { menu } from "./menu-config";
 
 export function Menu() {
   return (
     <Style.MenuContainer>
-      <div>
-        <Home />
-      </div>
-      <div>
-        <BarChart />
-      </div>
+      {menu.map(({ Icon, path, title }) => {
+        return (
+          <div key={title}>
+            <Icon />
+          </div>
+        );
+      })}
     </Style.MenuContainer>
   );
 }

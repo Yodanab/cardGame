@@ -16,7 +16,6 @@ const App = () => {
       <Menu />
       <Style.MainWrapper>
         <Header />
-        <SubMenu />
         <RouterProvider router={router} />
       </Style.MainWrapper>
     </Style.AppWrapper>

@@ -4,25 +4,15 @@ import { backgrounds, text } from "../../core/colors";
 export const Container = styled.div`
   width: 100%;
   background: ${backgrounds.menu};
-  height: 80px;
+  height: 50px;
   display: flex;
   align-items: center;
-  > div {
-    height: 50px;
-    &:first-child {
-      text-align: center;
-      line-height: 50px;
 
-      width: 70px;
-      border-right: 1px solid white;
-      font-size: 50px;
-      color: white;
-    }
-  }
   .title {
-    margin-inline: 20px;
+    font-family: monospace;
+    margin-inline: 10px;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 24px;
     line-height: 50px;
     color: white;
   }
