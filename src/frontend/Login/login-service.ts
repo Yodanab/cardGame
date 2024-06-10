@@ -18,14 +18,11 @@ export const signUp = async ({
   email,
 }) => {
   const url = "api/user/register";
-  try {
-    const { data } = await axios.post(url, {
-      userName,
-      password,
-      email,
-    });
-    return data;
-  } catch (err) {
-    throw Error;
-  }
+
+  const { data } = await axios.post(url, {
+    userName,
+    password,
+    email,
+  });
+  return data;
 };
