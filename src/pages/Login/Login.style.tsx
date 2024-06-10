@@ -14,6 +14,7 @@ export const LoginModal = styled.div`
   gap: 20px;
   padding: 40px;
   height: 100vh;
+  width: 400px;
   justify-content: center;
 `;
 

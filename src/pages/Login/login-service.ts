@@ -1,13 +1,5 @@
 import axios from "axios";
 
-export const initForm = {
-  userName: "",
-  password: "",
-  confirmPassword: "",
-  email: "",
-  error: null,
-};
-
 export const login = async ({
   userName,
   password,
@@ -25,7 +17,7 @@ export const signUp = async ({
   password,
   email,
 }) => {
-  const url = "user/register";
+  const url = "api/user/register";
   try {
     const { data } = await axios.post(url, {
       userName,

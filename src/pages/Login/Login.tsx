@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { TextInput } from "../../inputs/TextInput/TextInput";
+import { Input } from "@nextui-org/input";
+import { z } from "zod";
 import {
   LoginModal,
   LoginWrap,
@@ -8,19 +9,30 @@ import {
   ErrorMsg,
 } from "./Login.style";
 import { Button } from "../../inputs/Button/Button.style";
-import {
-  signUp,
-  initForm,
-} from "./login-service";
+import { signUp } from "./login-service";
 import { useUserStore } from "../../store/useUserStore";
+import { getErrorMessage } from "utils/get-error-message";
+import { KeyIcon } from "core/icons/Key";
+import { getFormState } from "./utils/form-utils";
 
 interface IForm {
   userName: string;
   password: string;
   confirmPassword: string;
   email: string;
-  error: string | null;
+  formError: string | null;
 }
+
+const FormSchema = z.object({
+  userName: z.string({
+    message: "This field is required",
+  }),
+  password: z.string().min(6),
+  confirmPassword: z.string(),
+  email: z
+    .string()
+    .email({ message: "Not Valid Email" }),
+});
 
 const title = {
   login: "Login",
@@ -28,20 +40,47 @@ const title = {
 };
 
 const inputsArr = {
-  login: ["userName", "password"],
-  signUp: [
-    "email",
-    "userName",
-    "password",
-    "confirmPassword",
+  login: [
+    {
+      key: "userName",
+      title: "User Name",
+      type: "text",
+      Icon: null,
+    },
+    {
+      key: "password",
+      title: "Password",
+      type: "password",
+      Icon: KeyIcon,
+    },
   ],
-};
+  signUp: [
+    {
+      key: "email",
+      title: "Email",
+      type: "email",
+      Icon: null,
+    },
+    {
+      key: "userName",
+      title: "User Name",
+      type: "text",
+      Icon: null,
+    },
+    {
+      key: "password",
+      title: "Password",
+      type: "password",
 
-const inputTitle = {
-  userName: "User Name",
-  password: "Password",
-  email: "Email",
-  confirmPassword: "Confirm Password",
+      Icon: null,
+    },
+    {
+      key: "confirmPassword",
+      title: "Confirm Password",
+      type: "password",
+      Icon: null,
+    },
+  ],
 };
 
 const accountString = {
@@ -55,20 +94,21 @@ const accountString = {
   },
 };
 
-const inputType = {
-  userName: "text",
-  password: "password",
-  confirmPassword: "password",
-  email: "email",
-};
-
 export const Login = () => {
-  const { error, login } = useUserStore();
+  const { login } = useUserStore();
 
   const [mode, setMode] = useState("login");
-  const [formData, setForm] = useState<IForm>(
-    initForm
+  const [formData, setForm] = useState(
+    getFormState()
   );
+  const [
+    { isLoading, error, formError },
+    setStatus,
+  ] = useState({
+    formError: getFormState(),
+    isLoading: false,
+    error: null,
+  });
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,14 +119,44 @@ export const Login = () => {
   };
 
   const handleModeChange = () => {
-    setForm(initForm);
+    setForm(getFormState());
     setMode((prev) =>
       prev === "login" ? "signUp" : "login"
     );
+    setStatus({
+      isLoading: false,
+      error: null,
+      formError: getFormState(),
+    });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setStatus((prev) => ({
+      ...prev,
+      error: false,
+      isLoading: true,
+    }));
+    const formValidation = FormSchema.safeParse(
+      formData
+    );
+    if (!formValidation.success) {
+      const inputsError = formValidation.error.issues.reduce(
+        (f, issue) => {
+          const field = issue.path[0];
+          f[field] = issue.message;
+          return f;
+        },
+        { ...formError }
+      );
+      setStatus((prev) => ({
+        formError: inputsError,
+        error: true,
+        isLoading: false,
+      }));
+      return;
+    }
+
     const {
       userName,
       password,
@@ -94,14 +164,23 @@ export const Login = () => {
       email,
     } = formData;
     if (mode === "login") {
-      login({ userName, password });
+      try {
+        await login({ userName, password });
+      } catch (err) {
+        setStatus({
+          formError: getFormState(),
+          isLoading: false,
+          error: getErrorMessage(err),
+        });
+      }
     }
     if (mode === "signUp") {
       if (password !== confirmPassword) {
-        setForm((prev) => ({
-          ...prev,
+        setStatus({
+          formError: getFormState(),
+          isLoading: false,
           error: "password doesn't match",
-        }));
+        });
         return;
       }
       signUp({ email, password, userName });
@@ -114,21 +193,42 @@ export const Login = () => {
         <LoginModal>
           <Title>{title[mode]}</Title>
 
-          {inputsArr[mode].map((inputItem, i) => {
-            return (
-              <TextInput
-                label={inputTitle[inputItem]}
-                handelChange={onInputChange}
-                name={inputItem}
-                value={formData[inputItem]}
-                type={inputType[inputItem]}
-                key={i}
-              />
-            );
-          })}
+          {inputsArr[mode].map(
+            (
+              {
+                title,
+                key,
+                type,
+                Icon,
+                validFun,
+              },
+              i
+            ) => {
+              return (
+                <Input
+                  isRequired
+                  label={title}
+                  onChange={onInputChange}
+                  name={key}
+                  value={formData[key].value}
+                  isInvalid={formError[key]}
+                  type={type}
+                  key={i}
+                  errorMessage={formError[key]}
+                  startContent={Icon && <Icon />}
+                />
+              );
+            }
+          )}
+
           {error && <ErrorMsg>{error}</ErrorMsg>}
 
-          <Button type="submit">Submit</Button>
+          <Button
+            // onClick={handleSubmit}
+            type="submit"
+          >
+            Submit
+          </Button>
 
           <CreateAccount>
             {accountString[mode].question}
