@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "@nextui-org/input";
-import { z } from "zod";
+import { Button } from "@nextui-org/react";
 import {
   LoginModal,
   LoginWrap,
@@ -11,17 +11,12 @@ import {
 import { signUp } from "./login-service";
 import { useUserStore } from "../../store/useUserStore";
 import { getErrorMessage } from "utils/get-error-message";
-import { getFormState, inputsArr, accountString } from "./utils/form-utils";
-import { Button } from "@nextui-org/react";
-
-const FormSchema = z.object({
-  userName: z.string({
-    message: "This field is required",
-  }),
-  password: z.string().min(6),
-  confirmPassword: z.string(),
-  email: z.string().email({ message: "Not Valid Email" }),
-});
+import {
+  getFormState,
+  inputsArr,
+  accountString,
+  schema,
+} from "./utils/form-utils";
 
 const title = {
   login: "Login",
@@ -34,8 +29,13 @@ export const Login = () => {
   const { login } = useUserStore();
 
   const [mode, setMode] = useState<Mode>("login");
-  const [formData, setForm] = useState(getFormState());
-  const [{ isLoading, error, formError }, setStatus] = useState({
+  const [formData, setForm] = useState(
+    getFormState()
+  );
+  const [
+    { isLoading, error, formError },
+    setStatus,
+  ] = useState({
     formError: getFormState(),
     isLoading: false,
     error: null,
@@ -43,15 +43,17 @@ export const Login = () => {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    // setForm((prev) => ({
-    //   ...prev,
-    //   [name]: value,
-    // }));
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleModeChange = () => {
     setForm(getFormState());
-    setMode((prev) => (prev === "login" ? "signUp" : "login"));
+    setMode((prev) =>
+      prev === "login" ? "signUp" : "login"
+    );
     setStatus({
       isLoading: false,
       error: null,
@@ -66,7 +68,9 @@ export const Login = () => {
       error: false,
       isLoading: true,
     }));
-    const formValidation = FormSchema.safeParse(formData);
+    const formValidation = schema[mode].safeParse(
+      formData
+    );
     if (!formValidation.success) {
       const inputsError = formValidation.error.issues.reduce(
         (f, issue) => {
@@ -74,7 +78,7 @@ export const Login = () => {
           f[field] = issue.message;
           return f;
         },
-        { ...formError }
+        getFormState()
       );
       setStatus((prev) => ({
         formError: inputsError,
@@ -83,8 +87,15 @@ export const Login = () => {
       }));
       return;
     }
-
-    const { userName, password, confirmPassword, email } = formData;
+    setStatus((prev) => ({
+      ...prev,
+      formError: getFormState(),
+    }));
+    const {
+      userName,
+      password,
+      email,
+    } = formData;
     if (mode === "login") {
       try {
         await login({ userName, password });
@@ -97,51 +108,50 @@ export const Login = () => {
       }
     }
     if (mode === "signUp") {
-      if (password !== confirmPassword) {
-        setStatus({
-          formError: getFormState(),
-          isLoading: false,
-          error: "password doesn't match",
-        });
-        return;
-      }
       signUp({ email, password, userName });
     }
   };
-
   return (
     <LoginWrap>
       <form onSubmit={handleSubmit}>
         <LoginModal>
           <Title>{title[mode]}</Title>
 
-          {inputsArr[mode].map(({ title, key, type, Icon, validFun }, i) => {
-            return (
-              <Input
-                isRequired
-                label={title}
-                onChange={onInputChange}
-                name={key}
-                value={formData[key].value}
-                isInvalid={formError[key]}
-                type={type}
-                key={i}
-                errorMessage={formError[key]}
-                startContent={Icon && <Icon />}
-              />
-            );
-          })}
+          {inputsArr[mode].map(
+            ({ label, key, type, Icon }, i) => {
+              return (
+                <Input
+                  isRequired
+                  onChange={onInputChange}
+                  label={label}
+                  name={key}
+                  value={formData[key]}
+                  isInvalid={formError[key]}
+                  type={type}
+                  key={i}
+                  errorMessage={formError[key]}
+                  startContent={Icon && <Icon />}
+                />
+              );
+            }
+          )}
 
-          {error && <ErrorMsg>{error}</ErrorMsg>}
-
-          <Button size="lg" color="primary" type="submit">
+          <Button
+            isLoading={isLoading}
+            size="lg"
+            color="primary"
+            type="submit"
+          >
             Submit
           </Button>
 
           <CreateAccount>
             {accountString[mode].question}
-            <span onClick={handleModeChange}>{accountString[mode].link}</span>
+            <span onClick={handleModeChange}>
+              {accountString[mode].link}
+            </span>
           </CreateAccount>
+          {error && <ErrorMsg>{error}</ErrorMsg>}
         </LoginModal>
       </form>
     </LoginWrap>

@@ -1,16 +1,17 @@
 import { KeyIcon } from "core/icons/Key";
+import { z } from "zod";
 
 export const inputsArr = {
   login: [
     {
       key: "userName",
-      title: "User Name",
+      label: "User Name",
       type: "text",
       Icon: null,
     },
     {
       key: "password",
-      title: "Password",
+      label: "Password",
       type: "password",
       Icon: KeyIcon,
     },
@@ -18,26 +19,26 @@ export const inputsArr = {
   signUp: [
     {
       key: "email",
-      title: "Email",
-      type: "email",
+      label: "Email",
+      type: "text",
       Icon: null,
     },
     {
       key: "userName",
-      title: "User Name",
+      label: "User Name",
       type: "text",
       Icon: null,
     },
     {
       key: "password",
-      title: "Password",
+      label: "Password",
       type: "password",
 
       Icon: null,
     },
     {
       key: "confirmPassword",
-      title: "Confirm Password",
+      label: "Confirm Password",
       type: "password",
       Icon: null,
     },
@@ -63,3 +64,38 @@ export function getFormState() {
     email: "",
   };
 }
+
+const requiredString = z.string().min(1, {
+  message: "This field is required",
+});
+
+const SignUpSchema = z
+  .object({
+    userName: requiredString,
+    password: z.string().min(6, {
+      message:
+        "Password must contain at least 6 character(s)",
+    }),
+    confirmPassword: z.string(),
+    email: z.string().email({
+      message: "Please enter a valid email",
+    }),
+  })
+  .refine(
+    (data) =>
+      data.password === data.confirmPassword,
+    {
+      message: "Passwords don't match",
+      path: ["confirmPassword"],
+    }
+  );
+
+const LoginSchema = z.object({
+  userName: requiredString,
+  password: requiredString,
+});
+
+export const schema = {
+  login: LoginSchema,
+  signUp: SignUpSchema,
+};
