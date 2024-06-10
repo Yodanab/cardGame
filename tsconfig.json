@@ -3,13 +3,12 @@
     "jsx": "react",
     "target": "ESNext",
     "noImplicitAny": false,
-    "module": "ESNext",
+    "module": "NodeNext",
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "baseUrl": "src",
-    "allowSyntheticDefaultImports":true,
-    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports":true
     
   },
   "include": ["src/**/*"],
