@@ -9,8 +9,8 @@ import {
   ErrorMsg,
 } from "./Login.style";
 import { signUp } from "./login-service";
-import { useUserStore } from "../../store/useUserStore";
-import { getErrorMessage } from "utils/get-error-message";
+import { useUserStore } from "../store/useUserStore";
+import { getErrorMessage } from "frontend/utils/get-error-message";
 import {
   getFormState,
   inputsArr,
@@ -29,13 +29,8 @@ export const Login = () => {
   const { login } = useUserStore();
 
   const [mode, setMode] = useState<Mode>("login");
-  const [formData, setForm] = useState(
-    getFormState()
-  );
-  const [
-    { isLoading, error, formError },
-    setStatus,
-  ] = useState({
+  const [formData, setForm] = useState(getFormState());
+  const [{ isLoading, error, formError }, setStatus] = useState({
     formError: getFormState(),
     isLoading: false,
     error: null,
@@ -51,9 +46,7 @@ export const Login = () => {
 
   const handleModeChange = () => {
     setForm(getFormState());
-    setMode((prev) =>
-      prev === "login" ? "signUp" : "login"
-    );
+    setMode((prev) => (prev === "login" ? "signUp" : "login"));
     setStatus({
       isLoading: false,
       error: null,
@@ -68,18 +61,13 @@ export const Login = () => {
       error: false,
       isLoading: true,
     }));
-    const formValidation = schema[mode].safeParse(
-      formData
-    );
+    const formValidation = schema[mode].safeParse(formData);
     if (!formValidation.success) {
-      const inputsError = formValidation.error.issues.reduce(
-        (f, issue) => {
-          const field = issue.path[0];
-          f[field] = issue.message;
-          return f;
-        },
-        getFormState()
-      );
+      const inputsError = formValidation.error.issues.reduce((f, issue) => {
+        const field = issue.path[0];
+        f[field] = issue.message;
+        return f;
+      }, getFormState());
       setStatus((prev) => ({
         formError: inputsError,
         error: true,
@@ -91,11 +79,7 @@ export const Login = () => {
       ...prev,
       formError: getFormState(),
     }));
-    const {
-      userName,
-      password,
-      email,
-    } = formData;
+    const { userName, password, email } = formData;
     if (mode === "login") {
       try {
         await login({ userName, password });
@@ -117,39 +101,30 @@ export const Login = () => {
         <LoginModal>
           <Title>{title[mode]}</Title>
 
-          {inputsArr[mode].map(
-            ({ label, key, type, Icon }, i) => {
-              return (
-                <Input
-                  isRequired
-                  onChange={onInputChange}
-                  label={label}
-                  name={key}
-                  value={formData[key]}
-                  isInvalid={formError[key]}
-                  type={type}
-                  key={i}
-                  errorMessage={formError[key]}
-                  startContent={Icon && <Icon />}
-                />
-              );
-            }
-          )}
+          {inputsArr[mode].map(({ label, key, type, Icon }, i) => {
+            return (
+              <Input
+                isRequired
+                onChange={onInputChange}
+                label={label}
+                name={key}
+                value={formData[key]}
+                isInvalid={formError[key]}
+                type={type}
+                key={i}
+                errorMessage={formError[key]}
+                startContent={Icon && <Icon />}
+              />
+            );
+          })}
 
-          <Button
-            isLoading={isLoading}
-            size="lg"
-            color="primary"
-            type="submit"
-          >
+          <Button isLoading={isLoading} size="lg" color="primary" type="submit">
             Submit
           </Button>
 
           <CreateAccount>
             {accountString[mode].question}
-            <span onClick={handleModeChange}>
-              {accountString[mode].link}
-            </span>
+            <span onClick={handleModeChange}>{accountString[mode].link}</span>
           </CreateAccount>
           {error && <ErrorMsg>{error}</ErrorMsg>}
         </LoginModal>

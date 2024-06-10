@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import {
-  backgrounds,
-  text,
-} from "../../core/colors";
+import { backgrounds, text } from "../../core/colors";
 
 export const MenuContainer = styled.div`
   background: ${backgrounds.menu};

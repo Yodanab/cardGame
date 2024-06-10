@@ -1,4 +1,4 @@
-import { KeyIcon } from "core/icons/Key";
+import { KeyIcon } from "frontend/core/icons/Key";
 import { z } from "zod";
 
 export const inputsArr = {
@@ -73,22 +73,17 @@ const SignUpSchema = z
   .object({
     userName: requiredString,
     password: z.string().min(6, {
-      message:
-        "Password must contain at least 6 character(s)",
+      message: "Password must contain at least 6 character(s)",
     }),
     confirmPassword: z.string(),
     email: z.string().email({
       message: "Please enter a valid email",
     }),
   })
-  .refine(
-    (data) =>
-      data.password === data.confirmPassword,
-    {
-      message: "Passwords don't match",
-      path: ["confirmPassword"],
-    }
-  );
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 const LoginSchema = z.object({
   userName: requiredString,

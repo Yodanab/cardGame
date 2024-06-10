@@ -1,10 +1,10 @@
-import { Home } from "core/icons/Home";
-import { Cart } from "core/icons/Cart";
-import { Transfer } from "core/icons/Transfer";
-import { Controller } from "core/icons/Controller";
-import { Book } from "core/icons/Book";
-import { Card } from "core/icons/Cards";
-import { paths } from "router";
+import { Home } from "frontend/core/icons/Home";
+import { Cart } from "frontend/core/icons/Cart";
+import { Transfer } from "frontend/core/icons/Transfer";
+import { Controller } from "frontend/core/icons/Controller";
+import { Book } from "frontend/core/icons/Book";
+import { Card } from "frontend/core/icons/Cards";
+import { paths } from "frontend/router";
 
 export const menu = [
   {
