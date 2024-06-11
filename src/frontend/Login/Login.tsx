@@ -15,8 +15,14 @@ import {
   getFormState,
   inputsArr,
   accountString,
-  schema,
 } from "./utils/form-utils";
+import { LoginSchema, SignUpSchema  } from "shared/schema/schema";
+
+const schema = {
+  login: LoginSchema,
+  signUp: SignUpSchema,
+};
+
 
 const title = {
   login: "Login",

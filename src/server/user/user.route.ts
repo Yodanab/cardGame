@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { database } from "../database/db";
+import { userDB } from "../database/database";
+import { SignUpSchema, extractErrorsMessage } from "shared/schema/schema";
 
 export const userRoute = Router();
 
@@ -18,7 +19,9 @@ export const userRoute = Router();
 // });
 
 userRoute.post("/sign-up", (req, res) => {
-  const { userName, password, email } = req.body;
-
-  const user = database.get(userName);
+  const userData = SignUpSchema.safeParse(req.body);
+  const errorMessages = extractErrorsMessage(userData.error);
+  console.log(userData.error);
+  if (!userData.success) throw Error(errorMessages);
+  res.json(userData);
 });

@@ -1,8 +1,6 @@
 import { open } from "lmdb";
 
-export const database = open("./database", {
-  compression: true,
-});
+export const userDB = open({ path: "./database_store/user_db" });
 
 export function generateId() {
   const time = Date.now() | 0;
