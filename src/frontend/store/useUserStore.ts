@@ -13,6 +13,7 @@ interface UserStore {
   };
 
   login: (reqBody) => Promise<void>;
+  signUp: (reqBody) => Promise<void>;
 }
 
 export const useUserStore = create<UserStore>(

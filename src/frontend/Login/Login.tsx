@@ -8,7 +8,7 @@ import {
   CreateAccount,
   ErrorMsg,
 } from "./Login.style";
-import { signUp } from "./login-service";
+
 import { useUserStore } from "../store/useUserStore";
 import { getErrorMessage } from "frontend/utils/get-error-message";
 import {
@@ -16,13 +16,15 @@ import {
   inputsArr,
   accountString,
 } from "./utils/form-utils";
-import { LoginSchema, SignUpSchema  } from "shared/schema/schema";
+import {
+  LoginSchema,
+  SignUpSchema,
+} from "shared/schema/schema";
 
 const schema = {
   login: LoginSchema,
   signUp: SignUpSchema,
 };
-
 
 const title = {
   login: "Login",
@@ -32,7 +34,7 @@ const title = {
 type Mode = keyof typeof title;
 
 export const Login = () => {
-  const { login } = useUserStore();
+  const { login, signUp } = useUserStore();
 
   const [mode, setMode] = useState<Mode>("login");
   const [formData, setForm] = useState(
@@ -101,10 +103,11 @@ export const Login = () => {
       userName,
       password,
       email,
+      confirmPassword,
     } = formData;
     if (mode === "login") {
       try {
-        await login({ userName, password });
+        await login({ email, password });
       } catch (err) {
         setStatus({
           formError: getFormState(),
@@ -115,7 +118,12 @@ export const Login = () => {
     }
     if (mode === "signUp") {
       try {
-        signUp({ email, password, userName });
+        signUp({
+          email,
+          password,
+          userName,
+          confirmPassword,
+        });
       } catch (err) {
         setStatus({
           formError: getFormState(),
