@@ -13,7 +13,7 @@ export const menu = [
     Icon: Home,
   },
   {
-    title: "Cart",
+    title: "Shop",
     path: paths.cart,
     Icon: Cart,
   },
@@ -28,12 +28,12 @@ export const menu = [
     Icon: Controller,
   },
   {
-    title: "Cards",
+    title: "My Cards",
     path: paths.cards,
     Icon: Card,
   },
   {
-    title: "Album",
+    title: "My Album",
     path: paths.album,
     Icon: Book,
   },
