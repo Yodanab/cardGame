@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { backgrounds, text } from "../../core/colors";
+import {
+  backgrounds,
+  text,
+} from "../../core/colors";
 
 export const Container = styled.div`
   width: 100%;
@@ -7,10 +10,11 @@ export const Container = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 10px;
 
   .title {
     font-family: monospace;
-    margin-inline: 10px;
     font-weight: 700;
     font-size: 24px;
     line-height: 50px;

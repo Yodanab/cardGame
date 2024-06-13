@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import * as Style from "./Header.style";
-
-const menu = ["Home", "Club", "Cards", "INFO"];
+import { UserInfo } from "./UserInfo/UserInfo";
 
 export function Header() {
-  // const [selected, setSelected] = useState("");
   return (
     <Style.Container>
       <div className="title">CARD GAME</div>
+      <UserInfo />
     </Style.Container>
   );
 }
