@@ -12,6 +12,12 @@ import {
   CardHeader,
   ListboxItem,
   Listbox,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@nextui-org/react";
 import { Pig } from "frontend/core/icons/Pig";
 
@@ -21,7 +27,7 @@ const user = {
   coins: 70,
 };
 
-export const UserInfo = () => {
+export const UserInfo = ({ onAvatarClick }) => {
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
@@ -41,56 +47,67 @@ export const UserInfo = () => {
           userName={user.userName}
           email={user.email}
           coins={user.coins}
+          onAvatarClick={onAvatarClick}
         />
       </PopoverContent>
     </Popover>
   );
 };
 
-const UserCard = ({ userName, email, coins }) => {
+const UserCard = ({
+  userName,
+  email,
+  coins,
+  onAvatarClick,
+}) => {
   return (
-    <Card
-      shadow="none"
-      className="max-w-[300px] border-none bg-transparent"
-    >
-      <CardHeader className="justify-between flex gap-3">
-        <div className="flex gap-3">
-          <Avatar
-            radius="full"
-            size="md"
-            src="https://www.w3schools.com/howto/img_avatar.png"
-          />
-          <div className="flex flex-col items-start justify-center">
-            <h4 className="text-small font-semibold leading-none text-default-600">
-              {userName}
-            </h4>
-            <h5 className="text-small tracking-tight text-default-500">
-              {email}
-            </h5>
+    <>
+      <Card
+        shadow="none"
+        className="max-w-[300px] border-none bg-transparent"
+      >
+        <CardHeader className="justify-between flex gap-3">
+          <div className="flex gap-3">
+            <Avatar
+              onClick={onAvatarClick}
+              as="button"
+              radius="full"
+              size="md"
+              src="https://www.w3schools.com/howto/img_avatar.png"
+            />
+
+            <div className="flex flex-col items-start justify-center">
+              <h4 className="text-small font-semibold leading-none text-default-600">
+                {userName}
+              </h4>
+              <h5 className="text-small tracking-tight text-default-500">
+                {email}
+              </h5>
+            </div>
           </div>
-        </div>
-        <Button
-          color="primary"
-          radius="full"
-          size="sm"
-        >
-          Log Out
-        </Button>
-      </CardHeader>
-      <CardBody className="px-0 py-0">
-        <Listbox>
-          <ListboxItem>My Cards</ListboxItem>
-          <ListboxItem>My Packs</ListboxItem>
-        </Listbox>
-      </CardBody>
-      <CardFooter className="gap-3 flex">
-        <div className="flex items-center gap-3">
-          <Pig />
-          <p className="font-semibold text-default-600 text-small">
-            {coins} P
-          </p>
-        </div>
-      </CardFooter>
-    </Card>
+          <Button
+            color="primary"
+            radius="full"
+            size="sm"
+          >
+            Log Out
+          </Button>
+        </CardHeader>
+        <CardBody className="px-0 py-0">
+          <Listbox>
+            <ListboxItem>My Cards</ListboxItem>
+            <ListboxItem>My Packs</ListboxItem>
+          </Listbox>
+        </CardBody>
+        <CardFooter className="gap-3 flex">
+          <div className="flex items-center gap-3">
+            <Pig />
+            <p className="font-semibold text-default-600 text-small">
+              {coins} P
+            </p>
+          </div>
+        </CardFooter>
+      </Card>
+    </>
   );
 };
