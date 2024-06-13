@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { backgrounds, text } from "../../core/colors";
+import {
+  backgrounds,
+  text,
+} from "../../core/colors";
 
 export const MenuContainer = styled.div`
   background: ${backgrounds.menu};
@@ -18,7 +21,7 @@ export const MenuContainer = styled.div`
       fill: ${backgrounds.background};
     }
     &:hover svg {
-      fill: #ec802a;
+      fill: rgb(0, 111, 238);
     }
   }
 `;
