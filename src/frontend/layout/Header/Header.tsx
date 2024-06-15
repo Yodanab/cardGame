@@ -2,7 +2,7 @@ import React from "react";
 import { useDisclosure } from "@nextui-org/react";
 import * as Style from "./Header.style";
 import { UserInfo } from "./UserInfo/UserInfo";
-import { AvatarModal } from "./UserInfo/AvatarModal";
+import { AvatarModal } from "./UserInfo/AvatarsModal/AvatarModal";
 
 export function Header() {
   const {

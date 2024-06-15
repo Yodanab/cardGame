@@ -12,12 +12,6 @@ import {
   CardHeader,
   ListboxItem,
   Listbox,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
 } from "@nextui-org/react";
 import { Pig } from "frontend/core/icons/Pig";
 

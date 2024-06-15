@@ -13,7 +13,7 @@ const App = () => {
   return (
     <NextUIProvider>
       <main className="dark text-foreground bg-background">
-        {true || userInfo.id ? (
+        {userInfo.id ? (
           <Style.AppWrapper>
             <Menu />
             <Style.MainWrapper>
