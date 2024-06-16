@@ -12,4 +12,10 @@ export const pmsProjectsCard = [
     description: `Complete Shani's Projects to earn legendary treasures.`,
     linkUrl: "",
   },
+  {
+    title: `Moshe's Projects`,
+    imgSrc: "/avatars/moshe.jpg",
+    description: `Finish Moshe's tasks to gain legendary prizes`,
+    linkUrl: "",
+  },
 ] as const;
