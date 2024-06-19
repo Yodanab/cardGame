@@ -9,3 +9,9 @@ export const AppWrapper = styled.div`
 export const MainWrapper = styled.div`
   flex-grow: 1;
 `;
+
+export const ContentWrap = styled.div`
+  height: calc(100% - 50px);
+  overflow: auto;
+  padding: 20px;
+`;

@@ -1,20 +1,20 @@
 export const pmsProjectsCard = [
   {
     title: `Idan's Projects`,
-    imgSrc: "/avatars/idan.jpg",
+    imgSrc: "/characters/idan.jpg",
     description: `Complete Idan's Projects to unlock
               epic rewards`,
     linkUrl: "",
   },
   {
     title: `Shani's Projects`,
-    imgSrc: "/avatars/shani.jpg",
+    imgSrc: "/characters/shani.jpg",
     description: `Complete Shani's Projects to earn legendary treasures.`,
     linkUrl: "",
   },
   {
     title: `Moshe's Projects`,
-    imgSrc: "/avatars/moshe.jpg",
+    imgSrc: "/characters/moshe.jpg",
     description: `Finish Moshe's tasks to gain legendary prizes`,
     linkUrl: "",
   },
