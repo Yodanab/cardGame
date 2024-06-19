@@ -107,7 +107,7 @@ export const Login = () => {
     } = formData;
     if (mode === "login") {
       try {
-        await login({ email, password });
+        await login({ userName, password });
       } catch (err) {
         setStatus({
           formError: getFormState(),

@@ -3,8 +3,8 @@ import { KeyIcon } from "frontend/core/icons/Key";
 export const inputsArr = {
   login: [
     {
-      key: "email",
-      label: "Email",
+      key: "userName",
+      label: "User Name",
       type: "text",
       Icon: null,
     },
