@@ -14,21 +14,17 @@ import {
   Listbox,
 } from "@nextui-org/react";
 import { Pig } from "frontend/core/icons/Pig";
-
-const user = {
-  userName: "Yodan Abadi",
-  email: "yodana@radware.com",
-  coins: 70,
-};
+import { useUserStore } from "frontend/store/useUserStore";
 
 export const UserInfo = ({ onAvatarClick }) => {
+  const { userInfo } = useUserStore();
   return (
     <Popover placement="bottom">
       <PopoverTrigger>
         <User
           as="button"
-          name={user.userName}
-          description={`${user.coins} P`}
+          name={userInfo.userName}
+          description={`${userInfo.coins} P`}
           className="transition-transform"
           avatarProps={{
             src:
@@ -38,9 +34,9 @@ export const UserInfo = ({ onAvatarClick }) => {
       </PopoverTrigger>
       <PopoverContent className="dark p-1">
         <UserCard
-          userName={user.userName}
-          email={user.email}
-          coins={user.coins}
+          userName={userInfo.userName}
+          email={userInfo.email}
+          coins={userInfo.coins}
           onAvatarClick={onAvatarClick}
         />
       </PopoverContent>

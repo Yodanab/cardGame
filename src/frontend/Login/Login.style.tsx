@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const LoginWrap = styled.div`
+  width: 100%;
   form {
     position: relative;
   }

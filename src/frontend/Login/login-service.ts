@@ -4,7 +4,7 @@ export const login = async ({
   userName,
   password,
 }) => {
-  const url = "/api/user/login";
+  const url = "api/v1/mgmt/login";
   const encoded = btoa(`${userName}:${password}`);
   const { data } = await axios.get(url, {
     headers: {
@@ -28,4 +28,20 @@ export const signUp = async ({
     email,
   });
   return data;
+};
+
+export const checkAuth = async () => {
+  try {
+    const { data } = await axios.get(
+      "api/v1/mgmt/auth"
+    );
+    return data;
+  } catch (err) {
+    return {
+      userName: "",
+      id: null,
+      email: "",
+      coins: 0,
+    };
+  }
 };

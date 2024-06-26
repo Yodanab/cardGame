@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
@@ -7,25 +7,42 @@ import { Menu } from "frontend/layout/Menu/Menu";
 import { useUserStore } from "frontend/store/useUserStore";
 import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
+import { Loader } from "./layout/Loader/Loader";
 
 const App = () => {
-  const { userInfo } = useUserStore();
+  const {
+    userInfo,
+    checkAuth,
+    loading,
+  } = useUserStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const renderUi = () => {
+    if (loading) return <Loader />;
+    if (userInfo.id)
+      return (
+        <>
+          <Menu />
+          <Style.MainWrapper>
+            <Header />
+            <Style.ContentWrap>
+              <RouterProvider router={router} />
+            </Style.ContentWrap>
+          </Style.MainWrapper>
+        </>
+      );
+    return <Login />;
+  };
+
   return (
     <NextUIProvider>
       <main className="dark text-foreground bg-background">
-        {userInfo.id ? (
-          <Style.AppWrapper>
-            <Menu />
-            <Style.MainWrapper>
-              <Header />
-              <Style.ContentWrap>
-                <RouterProvider router={router} />
-              </Style.ContentWrap>
-            </Style.MainWrapper>
-          </Style.AppWrapper>
-        ) : (
-          <Login />
-        )}
+        <Style.AppWrapper>
+          {renderUi()}
+        </Style.AppWrapper>
       </main>
     </NextUIProvider>
   );

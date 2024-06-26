@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {
   login,
   signUp,
+  checkAuth,
 } from "frontend/Login/login-service";
 
 interface UserStore {
@@ -11,9 +12,10 @@ interface UserStore {
     coins: number;
     email: string;
   };
-
+  loading: boolean;
   login: (reqBody) => Promise<void>;
   signUp: (reqBody) => Promise<void>;
+  checkAuth: () => Promise<void>;
 }
 
 export const useUserStore = create<UserStore>(
@@ -46,6 +48,19 @@ export const useUserStore = create<UserStore>(
           email: data.email,
           coins: data.coins,
         },
+      });
+    },
+    async checkAuth() {
+      set({ loading: true });
+      const useData = await checkAuth();
+      set({
+        userInfo: {
+          userName: useData.userName,
+          id: useData.id,
+          email: useData.email,
+          coins: useData.coins,
+        },
+        loading: false,
       });
     },
   })

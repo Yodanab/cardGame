@@ -14,6 +14,11 @@ export const MenuContainer = styled.div`
   justify-content: center;
   gap: 40px;
   > div {
+    &.selected {
+      svg {
+        fill: rgb(0, 111, 238);
+      }
+    }
     cursor: pointer;
     svg {
       width: 35px;
