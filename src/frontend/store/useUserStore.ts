@@ -3,7 +3,7 @@ import {
   login,
   signUp,
   checkAuth,
-} from "frontend/Login/login-service";
+} from "frontend/api/user";
 
 interface UserStore {
   userInfo: {

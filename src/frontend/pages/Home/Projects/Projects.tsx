@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  Card,
-  Progress,
-  Divider,
-} from "@nextui-org/react";
-import {
-  ProjectsWrap,
-  TextPRogressWrap,
-} from "./Projects.style";
+import { ProjectsWrap } from "./Projects.style";
 import { pmsProjectsCard } from "../utils";
-import { PmCard } from "frontend/layout/PmCard/PmCard";
+import { PmProject } from "frontend/components/GameCard/PmProject";
 
 export const Projects = () => {
   return (
@@ -17,7 +9,7 @@ export const Projects = () => {
       {pmsProjectsCard.map((pmCard) => {
         return (
           <span key={pmCard.title}>
-            <PmCard
+            <PmProject
               title={pmCard.title}
               imgSrc={pmCard.imgSrc}
               description={pmCard.description}

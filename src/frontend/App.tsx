@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { NextUIProvider } from "@nextui-org/react";
-import { RouterProvider } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import { router } from "./router";
 import * as Style from "frontend/layout/AppWrapper.style";
 import { Menu } from "frontend/layout/Menu/Menu";
@@ -8,6 +12,7 @@ import { useUserStore } from "frontend/store/useUserStore";
 import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
 import { Loader } from "./layout/Loader/Loader";
+import { Home } from "./pages/Home/Home";
 
 const App = () => {
   const {
@@ -29,7 +34,12 @@ const App = () => {
           <Style.MainWrapper>
             <Header />
             <Style.ContentWrap>
-              <RouterProvider router={router} />
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+              </Routes>
             </Style.ContentWrap>
           </Style.MainWrapper>
         </>

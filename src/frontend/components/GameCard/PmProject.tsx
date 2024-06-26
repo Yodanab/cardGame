@@ -7,14 +7,14 @@ import {
   Button,
 } from "@nextui-org/react";
 
-interface IPmCard {
+interface PmProject {
   title: string;
   imgSrc: string;
   description: string;
   linkUrl: string;
 }
 
-export const PmCard: FC<IPmCard> = ({
+export const PmProject: FC<PmProject> = ({
   title,
   imgSrc,
   description,
