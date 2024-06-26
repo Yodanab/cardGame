@@ -8,6 +8,7 @@ import { useUserStore } from "frontend/store/useUserStore";
 import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
 import { Loader } from "./layout/Loader/Loader";
+import { NotFound } from "./pages/NotFound/NotFound";
 
 const App = () => {
   const {
@@ -39,7 +40,7 @@ const App = () => {
                 ))}
                 <Route
                   path="*"
-                  element={<div>404</div>}
+                  element={<NotFound />}
                 />
               </Routes>
             </Style.ContentWrap>
