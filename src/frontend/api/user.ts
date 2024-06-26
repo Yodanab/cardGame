@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const baseUserURL = '/api/user';
+
 export const login = async ({
   userName,
   password,
 }) => {
-  const url = "/api/user/login";
+  const url = `${baseUserURL}/login`;
   const encoded = btoa(`${userName}:${password}`);
   const { data } = await axios.get(url, {
     headers: {
@@ -20,7 +22,7 @@ export const signUp = async ({
   email,
   confirmPassword,
 }) => {
-  const url = "/api/user/register";
+  const url = `${baseUserURL}/register`;
   const { data } = await axios.post(url, {
     userName,
     password,

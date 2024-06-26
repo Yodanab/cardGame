@@ -1,8 +1,5 @@
 import { create } from "zustand";
-import {
-  login,
-  signUp,
-} from "frontend/Login/login-service";
+import { login, signUp } from "frontend/api/user";
 
 interface UserStore {
   userInfo: {
