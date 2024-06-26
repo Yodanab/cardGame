@@ -1,5 +1,4 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
 
 export const paths = {
@@ -11,9 +10,9 @@ export const paths = {
   album: "/album",
 } as const;
 
-export const router = createBrowserRouter([
+export const router = [
   {
     path: paths.home,
     element: <Home />,
   },
-]);
+];
