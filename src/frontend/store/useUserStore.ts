@@ -55,10 +55,10 @@ export const useUserStore = create<UserStore>(
       const useData = await checkAuth();
       set({
         userInfo: {
-          userName: useData.userName,
-          id: useData.id,
-          email: useData.email,
-          coins: useData.coins,
+          userName: useData.userName || "",
+          id: useData.id || null,
+          email: useData.email || "",
+          coins: useData.coins || 0,
         },
         loading: false,
       });

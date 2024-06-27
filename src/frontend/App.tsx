@@ -23,7 +23,7 @@ const App = () => {
 
   const renderUi = () => {
     if (loading) return <Loader />;
-    if (userInfo.id)
+    if (userInfo.id || true)
       return (
         <>
           <Menu />

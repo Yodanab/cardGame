@@ -1,9 +1,10 @@
 import React from "react";
 import { Home } from "./pages/Home/Home";
+import { Shop } from "./pages/Shop/Shop";
 
 export const paths = {
   home: "/",
-  cart: "/cart",
+  shop: "/shop",
   transfer: "/transfer",
   game: "/game",
   cards: "/cards",
@@ -14,5 +15,9 @@ export const router = [
   {
     path: paths.home,
     element: <Home />,
+  },
+  {
+    path: paths.shop,
+    element: <Shop />,
   },
 ];

@@ -14,7 +14,7 @@ export const menu = [
   },
   {
     title: "Shop",
-    path: paths.cart,
+    path: paths.shop,
     Icon: Cart,
   },
   {
