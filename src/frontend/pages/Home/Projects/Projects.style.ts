@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ProjectsWrap = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding-top: 50px;
   gap: 30px;
