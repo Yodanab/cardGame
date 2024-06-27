@@ -26,7 +26,7 @@ const App = () => {
 
   const renderUi = () => {
     if (loading) return <PageLoader />;
-    if (userInfo.id || true)
+    if (userInfo.id)
       return (
         <>
           {width > 1200 && <Menu />}
