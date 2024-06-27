@@ -37,13 +37,13 @@ export const MobileMenuItem = styled.div`
   gap: 30px;
   color: white;
   font-family: monospace;
-  font-size: 30px;
+  font-size: 20px;
   padding: 12px;
   cursor: pointer;
   border-radius: 10px;
   svg {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
   }
 
   &.selected {

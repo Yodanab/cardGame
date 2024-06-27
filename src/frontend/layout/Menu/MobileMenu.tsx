@@ -8,6 +8,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Divider,
 } from "@nextui-org/react";
 import { menu } from "./menu-config";
 import { MobileMenuItem } from "./Menu.style";
@@ -36,7 +37,7 @@ export const MobileMenu = () => {
         }
       />
 
-      <NavbarMenu className="w-9/12 bg-inherit overflow-hidden">
+      <NavbarMenu className="w-9/12 dark overflow-hidden">
         {menu.map(
           ({ Icon, path, title }, index) => (
             <NavbarMenuItem
