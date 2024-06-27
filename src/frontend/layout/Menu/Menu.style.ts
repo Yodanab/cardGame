@@ -31,6 +31,29 @@ export const MenuContainer = styled.div`
   }
 `;
 
+export const MobileMenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  color: white;
+  font-family: monospace;
+  font-size: 30px;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  &.selected {
+    color: rgb(0, 111, 238);
+  }
+  &:hover {
+    background-color: #616161;
+  }
+`;
+
 export const SubMenuHeader = styled.ul`
   background: ${backgrounds.submenu};
   list-style: none;

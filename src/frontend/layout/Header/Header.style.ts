@@ -10,8 +10,8 @@ export const Container = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px 0 10px;
+  gap: 20px;
+  padding: 0 20px 0 0px;
 
   .title {
     font-family: monospace;
@@ -22,4 +22,10 @@ export const Container = styled.div`
   }
 `;
 
-export const MenuHeader = styled.ul``;
+export const MobileMenuWrap = styled.div`
+  width: 70px;
+`;
+
+export const UserInfoWrap = styled.div`
+  margin-left: auto;
+`;

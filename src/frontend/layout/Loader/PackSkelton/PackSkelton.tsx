@@ -10,7 +10,7 @@ import {
 
 export const PackSkelton = () => {
   return (
-    <Card className="w-1/4 p-4">
+    <Card className="w-full p-4 grow">
       <ContentWrap>
         <HeaderWrap>
           <ImgSkelton />

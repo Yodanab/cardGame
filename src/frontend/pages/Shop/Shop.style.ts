@@ -19,4 +19,6 @@ export const PackGrid = styled.div`
   display: flex;
   gap: 20px;
   padding: 2px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;

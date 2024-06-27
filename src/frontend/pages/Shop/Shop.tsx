@@ -52,7 +52,7 @@ export const Shop = () => {
       </Tabs>
 
       <PackGrid>
-        {Array.from({ length: 4 }).map((_, i) => {
+        {Array.from({ length: 3 }).map((_, i) => {
           return <PackSkelton key={i} />;
         })}
       </PackGrid>

@@ -1,10 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { useDisclosure } from "@nextui-org/react";
 import * as Style from "./Header.style";
 import { UserInfo } from "./UserInfo/UserInfo";
 import { AvatarModal } from "./UserInfo/AvatarsModal/AvatarModal";
+import { MobileMenu } from "../Menu/MobileMenu";
 
-export function Header() {
+interface HeaderProps {
+  width: number;
+}
+
+export const Header: FC<HeaderProps> = ({
+  width,
+}) => {
   const {
     isOpen,
     onOpen,
@@ -12,12 +19,19 @@ export function Header() {
   } = useDisclosure();
   return (
     <Style.Container>
+      {width < 1200 && (
+        <Style.MobileMenuWrap>
+          <MobileMenu />
+        </Style.MobileMenuWrap>
+      )}
       <div className="title">CARD GAME</div>
-      <UserInfo onAvatarClick={onOpen} />
+      <Style.UserInfoWrap>
+        <UserInfo onAvatarClick={onOpen} />
+      </Style.UserInfoWrap>
       <AvatarModal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       />
     </Style.Container>
   );
-}
+};

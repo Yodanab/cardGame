@@ -9,6 +9,7 @@ import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
 import { PageLoader } from "./layout/Loader/PageLoader/PageLoader";
 import { NotFound } from "./pages/NotFound/NotFound";
+import useWindowDimensions from "./Hooks/useWindowDimensions";
 
 const App = () => {
   const {
@@ -17,18 +18,20 @@ const App = () => {
     loading,
   } = useUserStore();
 
+  const { height, width } = useWindowDimensions();
+
   useEffect(() => {
     checkAuth();
   }, []);
 
   const renderUi = () => {
     if (loading) return <PageLoader />;
-    if (userInfo.id)
+    if (userInfo.id || true)
       return (
         <>
-          <Menu />
+          {width > 1200 && <Menu />}
           <Style.MainWrapper>
-            <Header />
+            <Header width={width} />
             <Style.ContentWrap>
               <Routes>
                 {router.map((route) => (
