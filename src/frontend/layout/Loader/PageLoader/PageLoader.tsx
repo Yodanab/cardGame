@@ -10,7 +10,7 @@ const BookWrap = styled.div`
   width: 100%;
 `;
 
-export const Loader = ({
+export const PageLoader = ({
   width = "100px",
   height = "100px",
   text = "Loading...",

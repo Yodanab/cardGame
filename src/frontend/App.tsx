@@ -7,7 +7,7 @@ import { Menu } from "frontend/layout/Menu/Menu";
 import { useUserStore } from "frontend/store/useUserStore";
 import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
-import { Loader } from "./layout/Loader/Loader";
+import { PageLoader } from "./layout/Loader/PageLoader/PageLoader";
 import { NotFound } from "./pages/NotFound/NotFound";
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
   }, []);
 
   const renderUi = () => {
-    if (loading) return <Loader />;
+    if (loading) return <PageLoader />;
     if (userInfo.id || true)
       return (
         <>
