@@ -18,7 +18,7 @@ const App = () => {
     loading,
   } = useUserStore();
 
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     checkAuth();
