@@ -1,6 +1,7 @@
 import React from "react";
 import { Home } from "./pages/Home/Home";
 import { Shop } from "./pages/Shop/Shop";
+import { NotFound } from "./pages/NotFound/NotFound";
 
 export const paths = {
   home: "/",
@@ -19,5 +20,9 @@ export const router = [
   {
     path: paths.shop,
     element: <Shop />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];

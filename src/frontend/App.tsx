@@ -8,7 +8,6 @@ import { useUserStore } from "frontend/store/useUserStore";
 import { Login } from "frontend/Login/Login";
 import { Header } from "frontend/layout/Header/Header";
 import { PageLoader } from "./layout/Loader/PageLoader/PageLoader";
-import { NotFound } from "./pages/NotFound/NotFound";
 import useWindowDimensions from "./Hooks/useWindowDimensions";
 
 const App = () => {
@@ -41,10 +40,6 @@ const App = () => {
                     element={route.element}
                   />
                 ))}
-                <Route
-                  path="*"
-                  element={<NotFound />}
-                />
               </Routes>
             </Style.ContentWrap>
           </Style.MainWrapper>
