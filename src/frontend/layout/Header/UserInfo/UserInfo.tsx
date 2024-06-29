@@ -27,8 +27,7 @@ export const UserInfo = ({ onAvatarClick }) => {
           description={`${userInfo.coins} P`}
           className="transition-transform"
           avatarProps={{
-            src:
-              "https://www.w3schools.com/howto/img_avatar.png",
+            src: "/avatars/Sun.png",
           }}
         />
       </PopoverTrigger>
@@ -63,7 +62,7 @@ const UserCard = ({
               as="button"
               radius="full"
               size="md"
-              src="https://www.w3schools.com/howto/img_avatar.png"
+              src="/avatars/Sun.png"
             />
 
             <div className="flex flex-col items-start justify-center">

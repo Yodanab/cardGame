@@ -7,7 +7,7 @@ export const AvatarsWrap = styled.div`
   img {
     cursor: pointer;
     &.selected {
-      border: 1px solid;
+      outline: 2px solid;
     }
   }
 `;

@@ -28,4 +28,5 @@ export const MobileMenuWrap = styled.div`
 
 export const UserInfoWrap = styled.div`
   margin-left: auto;
+  align-self: flex-end;
 `;

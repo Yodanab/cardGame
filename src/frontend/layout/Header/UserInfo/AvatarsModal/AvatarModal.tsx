@@ -13,33 +13,33 @@ import { AvatarsWrap } from "./AvatarsModal.style";
 const avatars = [
   {
     id: 0,
-    src: "/avatars/Alexander.png",
-    title: "avatar",
+    src: "/avatars/Sun.png",
+    title: "Sun",
   },
   {
     id: 1,
-    src: "/avatars/Emma.png",
-    title: "avatar",
+    src: "/avatars/Meshi.png",
+    title: "Meshi",
   },
   {
     id: 2,
-    src: "/avatars/Ethan.png",
-    title: "avatar",
+    src: "/avatars/Yoni.png",
+    title: "Yoni",
   },
   {
     id: 3,
-    src: "/avatars/Isabella.png",
-    title: "avatar",
+    src: "/avatars/Geffen.png",
+    title: "Geffen",
   },
   {
     id: 4,
-    src: "/avatars/Lucas.png",
-    title: "avatar",
+    src: "/avatars/Gal.png",
+    title: "Gal",
   },
   {
     id: 5,
-    src: "/avatars/Sophia.png",
-    title: "avatar",
+    src: "/avatars/Arbel.png",
+    title: "Arbel",
   },
 ];
 
